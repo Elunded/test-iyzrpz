@@ -14,6 +14,6 @@ func main() {
 		log.Println(http.ListenAndServe("localhost:6060", nil))
 	}()
 
-	log.Println("Image Metadata Processor started...")
+	log.Println("Image Metadata Processor started with CONFLICT...")
 	processor.RunWorkerPool(5)
 }
