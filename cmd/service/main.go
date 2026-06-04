@@ -1,19 +1,16 @@
 package main
 
 import (
-	"log"
-	"net/http"
-	_ "net/http/pprof"
+	"os"
+	"time"
 
-	"github.com/Elunded/lab3/internal/processor"
+	"github.com/rs/zerolog"
 )
 
 func main() {
-	go func() {
-		log.Println("Pprof server started on :6060")
-		log.Println(http.ListenAndServe("localhost:6060", nil))
-	}()
+	logger := zerolog.New(os.Stdout).With().Timestamp().Str("service", "image-metadata-processor").Logger()
 
-	log.Println("Image Metadata Processor started with CONFLICT...")
-	processor.RunWorkerPool(5)
+	logger.Info().Msg("Image Metadata Processor started...")
+
+	time.Sleep(1 * time.Hour)
 }
